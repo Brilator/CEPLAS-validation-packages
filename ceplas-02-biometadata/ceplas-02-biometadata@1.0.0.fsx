@@ -1,6 +1,6 @@
 let [<Literal>]PACKAGE_METADATA = """(*
 ---
-Name: ceplas-01-investigation
+Name: ceplas-02-biometadata
 Summary: Validates the ARC's "biological" metadata.
 Description: |
 
@@ -99,6 +99,13 @@ let criticalCases =
         if arc.StudyCount + arc.AssayCount + arc.WorkflowCount + arc.RunCount = 0 then
             failwith "ARC does not contain any study or assay or workflow or run"
 
+    // TestCase Critical: ARC contains any annotation column (Characteristic, Parameter, Factor)
+
+    testCase "ARC contains any annotation column (Characteristic, Parameter, Factor)" <| fun _ ->
+
+        if not (hasAnnotationColumns arc) then
+            failwith "ARC contains no annotation column (Characteristic, Parameter, Factor)"
+
     for s in arc.Studies do
         
         // TestCase Critical: Every study contains at least one annotation table
@@ -135,7 +142,7 @@ let criticalCases =
                 if t.RowCount = 0 then
                     failwith $"Table {t.Name} contains no rows"
                     
-        for r in arc.Runs do
+    for r in arc.Runs do
         
         // TestCase Critical: Every run contains at least one annotation table
         testCase $"Run {r.Identifier} contains annotation table" <| fun _ ->
@@ -154,16 +161,22 @@ let criticalCases =
                     failwith $"Table {t.Name} contains no rows"
 
 
-
-
     ]
     
 
 let nonCriticalCases =
     testList "nonCriticalCases" [
-    
 
+        // TestCase Non-critical: Every annotation table contains some annotation column
+        
+        if hasAnnotationColumns arc then
 
+            for t in arc.ArcTables do
+                testCase $"Table {t.Name} contains annotation column" <| fun _ ->
+                
+                let annoColCount = characteristicCount t + parameterCount t + factorCount t
+                if annoColCount = 0 then
+                    failwith $"Table {t.Name} contains no annotation column"  
 
     ]
 
