@@ -371,6 +371,34 @@ let nonCriticalCases =
     ////// ARC Investigation metadata
     /////////////////////////////////////////////////////////////////
 
+    // TestCase Non-critical: ARC contains README in recommended file format: README.md
+
+    testCase "ARC contains README in recommended file format: README.md" <| fun _ ->
+
+        let containsReadmeMd =
+            Directory.EnumerateFiles(arcDir)
+            |> Seq.map Path.GetFileName
+            |> Seq.contains "README.md"
+
+        if not containsReadmeMd then
+            failwithf $"ARC contains README file in recommended file format: README.md"
+
+    // TestCase Non-critical: ARC contains LICENSE file in recommended file format: LICENSE
+
+    testCase "ARC contains LICENSE file in recommended file format: LICENSE" <| fun _ ->
+        let containsLICENSE =
+            Directory.EnumerateFiles(arcDir)
+            |> Seq.map Path.GetFileName
+            |> Seq.contains "README.md"
+
+        if not containsLICENSE then
+            failwithf $"ARC contains LICENSE file in recommended file format: LICENSE"
+
+
+    /////////////////////////////////////////////////////////////////
+    ////// ARC Investigation metadata
+    /////////////////////////////////////////////////////////////////
+
     for c in arc.Contacts |> Seq.distinctBy (fun c -> (c.FirstName, c.LastName)) do
         let fname = Option.defaultValue "" c.FirstName
         let lname = Option.defaultValue "" c.LastName
