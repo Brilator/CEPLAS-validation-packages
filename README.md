@@ -35,6 +35,14 @@ to simply grep them
 replace `let arcDir =` line with 
 
 ```fsharp
-let home = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile)
-let arcDir = home + "/datahub-dataplant/Facultative-CAM-in-Talinum/"
+// Local Test
+let arcDir = fsi.CommandLineArgs.[1]
 ```
+
+and run with
+
+```bash
+dotnet fsi ceplas-experimental/ceplas-experimental@1.0.2.fsx ~/datahub-dataplant/Facultative-CAM-in-Talinum/
+```
+
+

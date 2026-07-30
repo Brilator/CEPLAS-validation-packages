@@ -31,7 +31,7 @@ Description: |
     - Every annotation table contains a ProtocolREF column
 MajorVersion: 1
 MinorVersion: 0
-PatchVersion: 1
+PatchVersion: 2
 Publish: true
 Authors:
   - FullName: Dominik Brilhaus
@@ -94,10 +94,10 @@ let emailIsValid (email: string) =
 
 // Input:
 
-let arcDir = Directory.GetCurrentDirectory()
+// let arcDir = Directory.GetCurrentDirectory()
 
 // Local Test
-// let arcDir = fsi.CommandLineArgs.[1]
+let arcDir = fsi.CommandLineArgs.[1]
 
 ////////////////////////
 
@@ -159,46 +159,59 @@ let criticalCases =
 
         let readmeNames =
             set [
-                "readme"
-                "readme.md"
-                "readme.txt"
-                "readme.rst"
-                "readme.adoc"
-                "readme.asciidoc"
-                "readme.markdown"
-                "readme.mdown"
-                "readme.mkd"
-                "readme.org"
+                "README"
+                "README.md"
+                "README.txt"
+                "README.rst"
+                "README.adoc"
+                "README.asciidoc"
+                "README.markdown"
+                "README.mdown"
+                "README.mkd"
+                "README.org"
             ]
+
+        let readmeNamesLow = readmeNames |> Seq.map (fun n -> n.ToLowerInvariant()) |> set
 
         let containsReadme =
             Directory.EnumerateFiles(arcDir)
             |> Seq.map Path.GetFileName
             |> Seq.map (fun n -> n.ToLowerInvariant())
-            |> Seq.exists readmeNames.Contains
+            |> Seq.exists readmeNamesLow.Contains
 
         if not containsReadme then
-            failwithf
-                "ARC does not contain a README. Expected one of: %s"
-                (String.concat ", " readmeNames)
+            let readmeNamesOptions =                
+                Set.union readmeNames readmeNamesLow
+                |> String.concat ", " 
+            failwithf $"""ARC does not contain a README. README.md is recommended. Expected one of: {readmeNamesOptions}"""
 
     // TestCase Critical: ARC contains any LICENSE file
 
-    testCase "ARC contains any LICENSE file" <| fun _ ->
-        
-        let licenseNames = ["LICENSE.md"; "license.md"; "LICENSE.txt"; "license.txt"; "License.md"; "license"; "LICENSE";
-                            "LICENCE.md"; "licence.md"; "LICENCE.txt"; "licence.txt"; "Licence.md"; "licence"; "LICENCE"]
+    testCase "ARC contains LICENSE file" <| fun _ ->
 
-        let containsLicense = 
+        let licenseNames =
+            set [
+                "LICENSE"
+                "LICENSE.md"
+                "LICENSE.txt"
+                "LICENCE"
+                "LICENCE.md"
+                "LICENCE.txt"
+                ]
 
-            licenseNames
-            |> List.exists (fun n -> 
-                let p = Path.Combine(arcDir, n)
-                File.Exists p        
-            )
+        let licenseNamesLow = licenseNames |> Seq.map (fun n -> n.ToLowerInvariant()) |> set
 
-        if not containsLicense then
-            failwithf "ARC does not contain LICENSE file in any of the given paths: %O" licenseNames
+        let containsReadme =
+            Directory.EnumerateFiles(arcDir)
+            |> Seq.map Path.GetFileName
+            |> Seq.map (fun n -> n.ToLowerInvariant())
+            |> Seq.exists licenseNamesLow.Contains
+
+        if not containsReadme then
+            let licenseNamesOptions =                
+                Set.union licenseNames licenseNamesLow
+                |> String.concat ", " 
+            failwithf $"""ARC does not contain a LICENSE file. Expected one of: {licenseNamesOptions}"""
 
     ////////////////////////////////////
     ////// ARC Investigation
