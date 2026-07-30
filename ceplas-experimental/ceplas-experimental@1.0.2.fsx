@@ -392,7 +392,7 @@ let nonCriticalCases =
         let containsLICENSE =
             Directory.EnumerateFiles(arcDir)
             |> Seq.map Path.GetFileName
-            |> Seq.contains "README.md"
+            |> Seq.contains "LICENSE"
 
         if not containsLICENSE then
             failwithf $"ARC contains LICENSE file in recommended file format: LICENSE"
