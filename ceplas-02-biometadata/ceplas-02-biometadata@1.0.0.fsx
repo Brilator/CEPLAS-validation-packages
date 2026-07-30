@@ -3,6 +3,18 @@ let [<Literal>]PACKAGE_METADATA = """(*
 Name: ceplas-02-biometadata
 Summary: Validates the ARC's "biological" metadata.
 Description: |
+        ## Critical quality criteria
+        - ARC contains at least one study or assay or workflow or run
+        - ARC contains any annotation column (Characteristic, Parameter, Factor)
+        - Every study contains at least one annotation table
+        - Every study annotation table contains basic information
+        - Every assay contains at least one annotation table
+        - Every assay annotation table contains basic information
+        - Every run contains at least one annotation table
+        - Every run annotation table contains basic information
+
+        ## Non-critical quality criteria
+        - Every annotation table contains some annotation column
 
 MajorVersion: 1
 MinorVersion: 0
