@@ -62,9 +62,7 @@ let emailIsValid (email: string) =
 
 //// TODO: remove ////////////////////
 // Local Test
-
-let home = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile)
-let arcDir = home + "/datahub-dataplant/Facultative-CAM-in-Talinum/"
+let arcDir = fsi.CommandLineArgs.[1]
 
 
 ////////////////////////
