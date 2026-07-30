@@ -42,16 +42,5 @@ let arcDir = fsi.CommandLineArgs.[1]
 and run with
 
 ```bash
-dotnet fsi ceplas-experimental/ceplas-experimental@1.0.2.fsx ~/datahub-dataplant/Facultative-CAM-in-Talinum/
-```
-
-
-```bash
-{
-  echo "\t## Critical quality criteria"
-  grep -h "TestCase Critical" *2.fsx | sed 's|^[[:space:]]*// TestCase Critical: |\t- |'
-  echo
-  echo "\t## Non-critical quality criteria"
-  grep -h "TestCase Non-critical" *2.fsx | sed 's|^[[:space:]]*// TestCase Non-critical: |\t- |'
-}
+dotnet fsi ceplas-01-investigation/ceplas-01-investigation@1.0.0.fsx ~/datahub-dataplant/Facultative-CAM-in-Talinum/
 ```
