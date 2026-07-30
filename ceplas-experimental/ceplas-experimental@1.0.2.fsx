@@ -14,8 +14,11 @@ Description: |
     - ARC contains at least one study or one assay
     - Every study must contain at least one annotation table
     - Every assay must contain at least one annotation table
-    - ARC contains 'raw' data (e.g. raw dataset file or URL)    
-    ## Non-Critical quality criteria    
+    - ARC contains 'raw' data (e.g. raw dataset file or URL
+
+    ## Non-critical quality criteria
+    - ARC contains README in recommended file format: README.md
+    - ARC contains LICENSE file in recommended file format: LICENSE
     - Every investigation contact should have a valid email
     - Every investigation contact should have an affiliation
     - Every investigation contact should have an ORCID
@@ -28,7 +31,7 @@ Description: |
     - Every data entity should be annotated with at least one of Characteristic, Parameter, Factor
     - Every annotation table contains an Input
     - Every annotation table contains an Output
-    - Every annotation table contains a ProtocolREF column
+    - Every annotation table contains a Protocol reference
 MajorVersion: 1
 MinorVersion: 0
 PatchVersion: 2
@@ -47,7 +50,7 @@ Tags:
   - Name: experimental
   - Name: quality-arc
 ReleaseNotes: |
-  - hotfix run file name pruning ("./<filename>" -> "<filename>")
+  - Improve file README and LICENSE file handling
 ---
 *)"""
 
@@ -368,7 +371,7 @@ let nonCriticalCases =
     testList "nonCriticalCases" [
 
     /////////////////////////////////////////////////////////////////
-    ////// ARC Investigation metadata
+    ////// ARC Root
     /////////////////////////////////////////////////////////////////
 
     // TestCase Non-critical: ARC contains README in recommended file format: README.md
@@ -393,7 +396,6 @@ let nonCriticalCases =
 
         if not containsLICENSE then
             failwithf $"ARC contains LICENSE file in recommended file format: LICENSE"
-
 
     /////////////////////////////////////////////////////////////////
     ////// ARC Investigation metadata
@@ -454,7 +456,7 @@ let nonCriticalCases =
     ////// ARC Study + Assay top level metadata
     /////////////////////////////////////////////////////////////////
     
-    // TestCase Non-Critical: Every study contains top-level metadata
+    // TestCase Non-critical: Every study contains top-level metadata
     
     for s in arc.Studies do
         // Study contains useful title
@@ -480,7 +482,7 @@ let nonCriticalCases =
             if s.Contacts.Count < 1 then
                 failwith $"Study {s.Identifier} contains no contacts"
 
-    // TestCase Non-Critical: Every assay contains top-level metadata
+    // TestCase Non-critical: Every assay contains top-level metadata
 
     for a in arc.Assays do
 
@@ -526,7 +528,7 @@ let nonCriticalCases =
         
     /////////////////////////////////////////////////////////////////
 
-    // TestCase Non-Critical: ARC annotation tables are connected
+    // TestCase Non-critical: ARC annotation tables are connected
     for name, nodes in tableNodes do    
         
         testCase $"ARC annotation tables are connected"  <| fun _ ->
@@ -545,13 +547,13 @@ let nonCriticalCases =
 
     for d in arc.ArcTables.Data do
 
-    // TestCase Non-Critical: Every data entity should be derived from a Source or Sample
+    // TestCase Non-critical: Every data entity should be derived from a Source or Sample
 
         testCase $"Data entity {d.Name} derives from a Source or Sample"  <| fun _ ->
             if d.FirstSamples.IsEmpty && d.Sources.Count = 0 then
                 failwith $"Data entity {d.Name} does not derive from a Source or Sample"
     
-    // TestCase Non-Critical: Every data entity should be annotated with at least one of Characteristic, Parameter, Factor
+    // TestCase Non-critical: Every data entity should be annotated with at least one of Characteristic, Parameter, Factor
         
         testCase $"Data entity {d.Name} contains at least one of Characteristic, Parameter, Factor"  <| fun _ ->
             if d.PreviousValues.IsEmpty then
@@ -561,21 +563,21 @@ let nonCriticalCases =
 
     for t in arc.ArcTables do
 
-        // TestCase Non-Critical: Every annotation table contains an Input
+        // TestCase Non-critical: Every annotation table contains an Input
         
         testCase $"Table {t.Name} contains `Input`" <| fun _ ->
                 
                 if t.InputNames.Length < 1 then
                     failwith $"Table {t.Name} contains no Input"
 
-        // TestCase Non-Critical: Every annotation table contains an Output
+        // TestCase Non-critical: Every annotation table contains an Output
         
         testCase $"Table {t.Name} contains `Output`" <| fun _ ->
                 
                 if t.OutputNames.Length < 1 then
                     failwith $"Table {t.Name} contains no Output"
 
-        // TestCase Non-Critical: Every annotation table contains a Protocol reference
+        // TestCase Non-critical: Every annotation table contains a Protocol reference
                     
         testCase $"Table {t.Name} contains `Protocol`" <| fun _ ->
                 
