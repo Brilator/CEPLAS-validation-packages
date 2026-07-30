@@ -4,6 +4,8 @@ Name: ceplas-01-investigation
 Summary: Validates whether the ARC contains the minimal metadata to meet the CEPLAS quality criteria only on investigation level.
 Description: |
     ## Critical quality criteria
+    - ARC contains README
+    - ARC contains any LICENSE file
     - Investigation contains title
     - Investigation contains description
     - Investigation contains contact
@@ -11,6 +13,8 @@ Description: |
     - At least two investigation contacts contain an affiliation and valid email
 
     ## Non-critical quality criteria
+    - ARC contains README in recommended file format: README.md
+    - ARC contains LICENSE file in recommended file format: LICENSE
     - Every investigation contact should have a valid email
     - Every investigation contact should have an affiliation
     - Every investigation contact should have an ORCID
@@ -76,6 +80,70 @@ arc.DataContextMapping()
 
 let criticalCases =     
     testList "criticalCases" [
+
+    ////////////////////////////////////
+    ////// ARC root
+    ////////////////////////////////////
+
+    // TestCase Critical: ARC contains README
+
+    testCase "ARC contains README" <| fun _ ->
+
+        let readmeNames =
+            set [
+                "README"
+                "README.md"
+                "README.txt"
+                "README.rst"
+                "README.adoc"
+                "README.asciidoc"
+                "README.markdown"
+                "README.mdown"
+                "README.mkd"
+                "README.org"
+            ]
+
+        let readmeNamesLow = readmeNames |> Seq.map (fun n -> n.ToLowerInvariant()) |> set
+
+        let containsReadme =
+            Directory.EnumerateFiles(arcDir)
+            |> Seq.map Path.GetFileName
+            |> Seq.map (fun n -> n.ToLowerInvariant())
+            |> Seq.exists readmeNamesLow.Contains
+
+        if not containsReadme then
+            let readmeNamesOptions =                
+                Set.union readmeNames readmeNamesLow
+                |> String.concat ", " 
+            failwithf $"""ARC does not contain a README. README.md is recommended. Expected one of: {readmeNamesOptions}"""
+
+    // TestCase Critical: ARC contains any LICENSE file
+
+    testCase "ARC contains LICENSE file" <| fun _ ->
+
+        let licenseNames =
+            set [
+                "LICENSE"
+                "LICENSE.md"
+                "LICENSE.txt"
+                "LICENCE"
+                "LICENCE.md"
+                "LICENCE.txt"
+                ]
+
+        let licenseNamesLow = licenseNames |> Seq.map (fun n -> n.ToLowerInvariant()) |> set
+
+        let containsReadme =
+            Directory.EnumerateFiles(arcDir)
+            |> Seq.map Path.GetFileName
+            |> Seq.map (fun n -> n.ToLowerInvariant())
+            |> Seq.exists licenseNamesLow.Contains
+
+        if not containsReadme then
+            let licenseNamesOptions =                
+                Set.union licenseNames licenseNamesLow
+                |> String.concat ", " 
+            failwithf $"""ARC does not contain a LICENSE file. Expected one of: {licenseNamesOptions}"""
 
     ////////////////////////////////////
     ////// ARC Investigation
@@ -146,6 +214,33 @@ let criticalCases =
 
 let nonCriticalCases =
     testList "nonCriticalCases" [
+    
+    /////////////////////////////////////////////////////////////////
+    ////// ARC Root
+    /////////////////////////////////////////////////////////////////
+
+    // TestCase Non-critical: ARC contains README in recommended file format: README.md
+
+    testCase "ARC contains README in recommended file format: README.md" <| fun _ ->
+
+        let containsReadmeMd =
+            Directory.EnumerateFiles(arcDir)
+            |> Seq.map Path.GetFileName
+            |> Seq.contains "README.md"
+
+        if not containsReadmeMd then
+            failwithf $"ARC contains README file in recommended file format: README.md"
+
+    // TestCase Non-critical: ARC contains LICENSE file in recommended file format: LICENSE
+
+    testCase "ARC contains LICENSE file in recommended file format: LICENSE" <| fun _ ->
+        let containsLICENSE =
+            Directory.EnumerateFiles(arcDir)
+            |> Seq.map Path.GetFileName
+            |> Seq.contains "README.md"
+
+        if not containsLICENSE then
+            failwithf $"ARC contains LICENSE file in recommended file format: LICENSE"
 
     /////////////////////////////////////////////////////////////////
     ////// ARC Investigation metadata
