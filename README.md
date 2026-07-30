@@ -1,8 +1,6 @@
 
 # CEPLAS validation packages
 
-Dev area for CEPLAS validation packages
-
 - Submit here: 
   - https://github.com/nfdi4plants/arc-validate-package-registry
   - https://avpr.nfdi4plants.org
