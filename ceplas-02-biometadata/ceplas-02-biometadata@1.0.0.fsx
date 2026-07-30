@@ -134,6 +134,24 @@ let criticalCases =
                     failwith $"Table {t.Name} contains less than 2 columns"
                 if t.RowCount = 0 then
                     failwith $"Table {t.Name} contains no rows"
+                    
+        for r in arc.Runs do
+        
+        // TestCase Critical: Every run contains at least one annotation table
+        testCase $"Run {r.Identifier} contains annotation table" <| fun _ ->
+            if r.TableCount = 0 then
+                failwith $"Run {r.Identifier} contains no annotation table"
+        
+        // TestCase Critical: Every run annotation table contains basic information
+        // (more than 2 columns and 0 rows)
+        
+        for t in r.Tables do
+            testCase $"Table {t.Name} of run {r.Identifier} contains basic information" <| fun _ ->
+                
+                if t.ColumnCount < 2 then
+                    failwith $"Table {t.Name} contains less than 2 columns"
+                if t.RowCount = 0 then
+                    failwith $"Table {t.Name} contains no rows"
 
 
 
