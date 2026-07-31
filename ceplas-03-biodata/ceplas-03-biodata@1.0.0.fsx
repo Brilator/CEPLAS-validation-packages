@@ -163,11 +163,10 @@ let criticalCases =
         // TestCase Critical: Every data entity should be derived from a Source or Sample
 
             testCase $"Data entity {d.Name} derives from a Source or Sample"  <| fun _ ->
-                // if d.FirstSamples.IsEmpty && d.Sources.Count = 0 then
 
                 let firstSamplesContainBlank =  d.FirstSamples |> List.exists (fun q -> q.Name = "")
                 
-                if d.FirstSamples.IsEmpty || firstSamplesContainBlank then
+                if (d.FirstSamples.IsEmpty || firstSamplesContainBlank) && d.Sources.Count = 0 then
                     failwith $"Data entity {d.Name} does not derive from a Source or Sample"
         
         // TestCase Critical: Every data entity should be annotated with at least one of Characteristic, Parameter, Factor

@@ -14,11 +14,14 @@ let arc = ARC.load arcDir
 for  d in arc.ArcTables.Data do
     printfn $"####{d.Name}"
     printfn $"#### {d.FirstSamples.IsEmpty}"
-    printfn "%A" d.FirstSamples
-    printfn "%A" d.FirstSamples.Head
 
     let fsBlank = 
         d.FirstSamples
         |> List.exists (fun q -> q.Name = "")
 
     printfn "%b" fsBlank
+
+    printfn $"{d.Sources.Count}"
+
+arc.ArcTables.Data
+|> Seq.map (fun d -> d.FirstSamples |> List.exists (fun q -> q.Name = ""))
