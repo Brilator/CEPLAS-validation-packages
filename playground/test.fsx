@@ -10,36 +10,15 @@ let arcDir = home + "/datahub-dataplant/Facultative-CAM-in-Talinum/"
 
 let arc = ARC.load arcDir
 
-let hasAnnotationColumns (t: ARC)=
-    t.ArcTables
-    |> Seq.exists (fun t ->
-        t.Columns
-        |> Seq.exists (fun c ->
-            c.Header.isCharacteristic || 
-            c.Header.isParameter|| 
-            c.Header.isFactor
-        ))
 
-let characteristicCount (t : ArcTable)=
-    t.Columns
-    |> Seq.filter (fun c -> c.Header.isCharacteristic)
-    |> Seq.length
+for  d in arc.ArcTables.Data do
+    printfn $"####{d.Name}"
+    printfn $"#### {d.FirstSamples.IsEmpty}"
+    printfn "%A" d.FirstSamples
+    printfn "%A" d.FirstSamples.Head
 
-let parameterCount (t : ArcTable)=
-    t.Columns
-    |> Seq.filter (fun c -> c.Header.isParameter)
-    |> Seq.length
-    
-let factorCount (t : ArcTable)=
-    t.Columns
-    |> Seq.filter (fun c -> c.Header.isFactor)
-    |> Seq.length
+    let fsBlank = 
+        d.FirstSamples
+        |> List.exists (fun q -> q.Name = "")
 
-if hasAnnotationColumns arc then
-
-  for t in arc.ArcTables do
-    let annoColCount = characteristicCount t + parameterCount t + factorCount t
-    if annoColCount = 0 then
-      printfn $"Annotation table {t.Name} contains no annotation column"
-
-
+    printfn "%b" fsBlank

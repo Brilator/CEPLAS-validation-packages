@@ -5,6 +5,16 @@
   - https://github.com/nfdi4plants/arc-validate-package-registry
   - https://avpr.nfdi4plants.org
 
+## Design
+
+- incremental, but independent?
+  - while logically building on one another (and at least in part mutually exclusive), every package should be useful for itself 
+
+- ceplas-01-investigation/
+- ceplas-02-biometadata/
+- ceplas-03-biodata/
+- 
+
 
 ## Notes
 
@@ -43,4 +53,5 @@ and run with
 
 ```bash
 dotnet fsi ceplas-01-investigation/ceplas-01-investigation@1.0.0.fsx ~/datahub-dataplant/Facultative-CAM-in-Talinum/
+dotnet fsi ceplas-03-biodata/ceplas-03-biodata@1.0.0.fsx ~/datahub-dataplant/Facultative-CAM-in-Talinum/
 ```

@@ -14,7 +14,7 @@ Description: |
     - ARC contains at least one study or one assay
     - Every study must contain at least one annotation table
     - Every assay must contain at least one annotation table
-    - ARC contains 'raw' data (e.g. raw dataset file or URL
+    - ARC contains 'raw' data (e.g. raw dataset file or URL)
 
     ## Non-critical quality criteria
     - ARC contains README in recommended file format: README.md
