@@ -41,6 +41,13 @@ open System.IO
 open Fable.SimpleHttp
 open System.Text
 
+//////////////////////////// 
+// TODO to be added to ARCtrl https://github.com/nfdi4plants/ARCtrl/pull/633
+type ArcTable with
+    member this.TryGetProtocolUriColumn() =
+        this.TryGetColumnByHeader(CompositeHeader.ProtocolUri)
+////////////////////////////
+
 // Input:
 
 // let arcDir = Directory.GetCurrentDirectory()
@@ -117,12 +124,11 @@ let criticalCases =
         // TestCase Critical: Every annotation table contains a Protocol reference
                     
         testCase $"Table {t.Name} contains `Protocol`" <| fun _ ->
-                
-                // TODO: check for Protocol Uri as well
 
-                if t.TryGetProtocolNameColumn().IsNone then
-                    failwith $"Table {t.Name} contains no Protocol Column"
+            if t.TryGetProtocolUriColumn().IsNone || t.TryGetProtocolNameColumn().IsNone then
+                failwith $"Table {t.Name} contains no ProtocolUri nor Protocol REF Column"
 
+    
     /////////////////////////////////////////////////////////////////
 
     // TestCase Critical: ARC annotation tables are connected
@@ -162,3 +168,5 @@ Setup.ValidationPackage(
 |> Execute.ValidationPipeline(
     basePath = arcDir
 )
+
+
