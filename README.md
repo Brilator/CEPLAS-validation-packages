@@ -60,4 +60,5 @@ and run with
 dotnet fsi ceplas-01-investigation/ceplas-01-investigation@1.0.0.fsx ~/datahub-dataplant/Facultative-CAM-in-Talinum/
 dotnet fsi ceplas-02-biometadata/ceplas-02-biometadata@1.0.0.fsx ~/datahub-dataplant/Facultative-CAM-in-Talinum/
 dotnet fsi ceplas-03-biodata/ceplas-03-biodata@1.0.0.fsx ~/datahub-dataplant/Facultative-CAM-in-Talinum/
+dotnet fsi ceplas-04-connectedData/ceplas-04-connectedData@1.0.0.fsx ~/datahub-dataplant/Facultative-CAM-in-Talinum/
 ```

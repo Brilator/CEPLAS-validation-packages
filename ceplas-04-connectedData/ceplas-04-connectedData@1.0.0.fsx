@@ -124,9 +124,9 @@ let criticalCases =
         // TestCase Critical: Every annotation table contains a Protocol reference
                     
         testCase $"Table {t.Name} contains `Protocol`" <| fun _ ->
-
-            if t.TryGetProtocolUriColumn().IsNone || t.TryGetProtocolNameColumn().IsNone then
-                failwith $"Table {t.Name} contains no ProtocolUri nor Protocol REF Column"
+            
+            if t.TryGetProtocolUriColumn().IsNone && t.TryGetProtocolNameColumn().IsNone then
+                failwith $"Table {t.Name} contains no 'Protocol Uri' nor 'Protocol REF' Column"
 
     
     /////////////////////////////////////////////////////////////////
