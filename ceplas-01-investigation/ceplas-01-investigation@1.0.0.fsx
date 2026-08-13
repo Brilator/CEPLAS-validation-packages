@@ -260,9 +260,10 @@ let nonCriticalCases =
 
         testCase $"Contact {fullName} contains email" <| fun _ ->
             match c.EMail with
-            | None -> failwith $"Contact {fullName} contains no email"
-            | Some email when emailIsValid email -> ()
-            | Some email -> failwith $"{email} is not a valid email"
+            | None ->
+                failtest $"Contact {fullName} contains no email"
+            | Some email ->
+                Expect.isTrue (emailIsValid email) $"'{email}' is not a valid email"
         
     // TestCase Non-critical: Every investigation contact should have an affiliation
         
@@ -283,9 +284,10 @@ let nonCriticalCases =
         |> Seq.exists (fun c -> c.Roles |> Seq.exists (fun oa -> 
                 oa.NameText = "researcher")
                 )
-
-    Expect.isTrue containsResearcher
-        $"No investigation contact has role 'researcher'"
+    
+    testCase $"At least one investigation contact should have role 'researcher'" <| fun _ ->
+        Expect.isTrue containsResearcher
+            $"No investigation contact has role 'researcher'"
 
     // TestCase Non-critical: At least one investigation contact should have role 'principal investigator'
     
