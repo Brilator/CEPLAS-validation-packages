@@ -109,11 +109,12 @@ let criticalCases =
             |> Seq.map (fun n -> n.ToLowerInvariant())
             |> Seq.exists readmeNamesLow.Contains
 
-        if not containsReadme then
-            let readmeNamesOptions =                
-                Set.union readmeNames readmeNamesLow
-                |> String.concat ", " 
-            failwithf $"""ARC does not contain a README. README.md is recommended. Expected one of: {readmeNamesOptions}"""
+        let readmeNamesOptions =                
+            Set.union readmeNames readmeNamesLow
+            |> String.concat ", " 
+        
+        Expect.isTrue containsReadme
+            $"""ARC does not contain a README. README.md is recommended. Expected one of: {readmeNamesOptions}"""
 
     // TestCase Critical: ARC contains any LICENSE file
 
@@ -131,17 +132,18 @@ let criticalCases =
 
         let licenseNamesLow = licenseNames |> Seq.map (fun n -> n.ToLowerInvariant()) |> set
 
-        let containsReadme =
+        let containsLicense =
             Directory.EnumerateFiles(arcDir)
             |> Seq.map Path.GetFileName
             |> Seq.map (fun n -> n.ToLowerInvariant())
             |> Seq.exists licenseNamesLow.Contains
+        
+        let licenseNamesOptions =                
+            Set.union licenseNames licenseNamesLow
+            |> String.concat ", " 
 
-        if not containsReadme then
-            let licenseNamesOptions =                
-                Set.union licenseNames licenseNamesLow
-                |> String.concat ", " 
-            failwithf $"""ARC does not contain a LICENSE file. Expected one of: {licenseNamesOptions}"""
+        Expect.isTrue containsLicense
+            $"""ARC does not contain a LICENSE file. Expected one of: {licenseNamesOptions}"""
 
     ////////////////////////////////////
     ////// ARC Investigation
@@ -150,28 +152,31 @@ let criticalCases =
     // TestCase Critical: Investigation contains title
 
     testCase $"Investigation {arc.Identifier} contains title" <| fun _ ->
-        // Investigation title exists
-        if arc.Title.IsNone then
-            failwith $"Investigation {arc.Identifier} contains no title"
+
+        // Investigation title exists        
+        Expect.isSome arc.Title
+            $"Investigation {arc.Identifier} contains no title"
+
         // Investigation title is longer than 3 characters
-        if arc.Title.Value.Length < 4 then
-            failwith $"Investigation {arc.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{arc.Title.Value}\""       
+        Expect.isGreaterThan arc.Title.Value.Length 4 
+            $"Investigation {arc.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{arc.Title.Value}\""       
 
     // TestCase Critical: Investigation contains description
 
     testCase $"Investigation {arc.Identifier} contains description" <| fun _ ->
         // Investigation description exists
-        if arc.Description.IsNone then
-            failwith $"Investigation {arc.Identifier} contains no description"
+        Expect.isSome arc.Description
+            $"Investigation {arc.Identifier} contains no description"
         // Investigation description is longer than 30 characters
-        if arc.Description.Value.Length < 31 then
-            failwith $"Investigation {arc.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{arc.Description.Value}\""
+        Expect.isGreaterThan arc.Description.Value.Length 31
+            $"Investigation {arc.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{arc.Description.Value}\""
 
     // TestCase Critical: Investigation contains contact
 
-    testCase $"Investigation {arc.Identifier} contains contact" <| fun _ ->
-        if arc.Contacts.Count = 0 then
-            failwith $"Investigation {arc.Identifier} contains no contact"
+    testCase $"Investigation {arc.Identifier} contains contact" <| fun _ ->        
+        
+        Expect.notEqual arc.Contacts.Count 0
+            $"Investigation {arc.Identifier} contains no contact"
     
     // TestCase Critical: All investigation contacts contain first name and last name
 
