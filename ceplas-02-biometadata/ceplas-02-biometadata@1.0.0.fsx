@@ -206,25 +206,25 @@ let nonCriticalCases =
         // TestCase Non-critical: Every study contains a title
         testCase $"Study {s.Identifier} contains title" <| fun _ ->
             // Study title exists
-            if s.Title.IsNone then
-                failwith $"Study {s.Identifier} contains no title"
+            Expect.isSome s.Title
+                $"Study {s.Identifier} contains no title"
             // Study title is longer than 3 characters
-            if s.Title.Value.Length < 4 then
-                failwith $"Study {s.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{s.Title.Value}\""
+            Expect.isGreaterThan s.Title.Value.Length 4
+                $"Study {s.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{s.Title.Value}\""
         
         // TestCase Non-critical: Every study contains a description
         testCase $"Study {s.Identifier} contains description" <| fun _ ->
             // Study description exists
-            if s.Description.IsNone then
-                failwith $"Study {s.Identifier} contains no description"
+            Expect.isSome s.Description
+                $"Study {s.Identifier} contains no description"
             // Study description is longer than 30 characters
-            if s.Description.Value.Length < 31 then
-                failwith $"Study {s.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{s.Description.Value}\""
+            Expect.isGreaterThan s.Description.Value.Length 30
+                $"Study {s.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{s.Description.Value}\""
 
         // TestCase Non-critical: Every study contains contacts
         testCase $"Study {s.Identifier} contains contacts" <| fun _ ->
-            if s.Contacts.Count < 1 then
-                failwith $"Study {s.Identifier} contains no contacts"
+            Expect.isGreaterThan s.Contacts.Count 0
+                $"Study {s.Identifier} contains no contacts"
     
     /////////////////////////////////////////////////////////////////
     ////// ARC Assay top level metadata
@@ -235,17 +235,17 @@ let nonCriticalCases =
         // TestCase Non-critical: Every assay contains a title
         testCase $"Assay {a.Identifier} contains title" <| fun _ ->
             // Assay title exists
-            if a.Title.IsNone then
-                failwith $"Assay {a.Identifier} contains no title"
+            Expect.isSome a.Title
+                $"Assay {a.Identifier} contains no title"
             // Assay title is longer than 4 characters
-            if a.Title.Value.Length < 4 then
-                failwith $"Assay {a.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{a.Title.Value}\""
+            Expect.isGreaterThan a.Title.Value.Length 4
+                $"Assay {a.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{a.Title.Value}\""
         
         // TestCase Non-critical: Every assay contains a description
         testCase $"Assay {a.Identifier} contains description" <| fun _ ->
             // Assay description exists
-            if a.Description.IsNone then
-                failwith $"Assay {a.Identifier} contains no description"
+            Expect.isSome a.Description
+                $"Assay {a.Identifier} contains no description"
             // Assay description is longer than 30 characters
             if a.Description.Value.Length < 31 then
                 failwith $"Assay {a.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{a.Description.Value}\""
