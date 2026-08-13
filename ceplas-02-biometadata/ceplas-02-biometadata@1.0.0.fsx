@@ -126,22 +126,22 @@ let criticalCases =
 
     testCase "ARC contains at least one study or assay or workflow or run" <| fun _ ->
 
-        if arc.StudyCount + arc.AssayCount + arc.WorkflowCount + arc.RunCount = 0 then
-            failwith "ARC does not contain any study or assay or workflow or run"
+        Expect.isGreaterThan (arc.StudyCount + arc.AssayCount + arc.WorkflowCount + arc.RunCount) 0
+            "ARC does not contain any study or assay or workflow or run"
 
     // TestCase Critical: ARC contains any annotation column (Characteristic, Parameter, Factor)
 
     testCase "ARC contains any annotation column (Characteristic, Parameter, Factor)" <| fun _ ->
-
-        if not (hasAnnotationColumns arc) then
-            failwith "ARC contains no annotation column (Characteristic, Parameter, Factor)"
+        Expect.isTrue (hasAnnotationColumns arc)
+            "ARC contains no annotation column (Characteristic, Parameter, Factor)"
 
     for s in arc.Studies do
         
         // TestCase Critical: Every study contains at least one annotation table
         testCase $"Study {s.Identifier} contains annotation table" <| fun _ ->
-            if s.TableCount = 0 then
-                failwith $"Study {s.Identifier} contains no annotation table"
+            
+            Expect.isGreaterThan s.TableCount 0 
+                $"Study {s.Identifier} contains no annotation table"
         
         // TestCase Critical: Every study annotation table contains basic information
         // (more than 2 columns and 0 rows)
@@ -149,17 +149,18 @@ let criticalCases =
         for t in s.Tables do
             testCase $"Table {t.Name} of study {s.Identifier} contains basic information" <| fun _ ->
                 
-                if t.ColumnCount < 2 then
-                    failwith $"Table {t.Name} contains less than 2 columns"
-                if t.RowCount = 0 then
-                    failwith $"Table {t.Name} contains no rows"
+                Expect.isGreaterThanOrEqual t.ColumnCount 2
+                    $"Table {t.Name} contains less than 2 columns"
+                Expect.isGreaterThan t.RowCount 0
+                    $"Table {t.Name} contains no rows"
 
     for a in arc.Assays do
         
         // TestCase Critical: Every assay contains at least one annotation table
         testCase $"Assay {a.Identifier} contains annotation table" <| fun _ ->
-            if a.TableCount = 0 then
-                failwith $"Assay {a.Identifier} contains no annotation table"
+            
+            Expect.isGreaterThan a.TableCount 0
+                $"Assay {a.Identifier} contains no annotation table"
         
         // TestCase Critical: Every assay annotation table contains basic information
         // (more than 2 columns and 0 rows)
@@ -167,17 +168,17 @@ let criticalCases =
         for t in a.Tables do
             testCase $"Table {t.Name} of assay {a.Identifier} contains basic information" <| fun _ ->
                 
-                if t.ColumnCount < 2 then
-                    failwith $"Table {t.Name} contains less than 2 columns"
-                if t.RowCount = 0 then
-                    failwith $"Table {t.Name} contains no rows"
+                Expect.isGreaterThanOrEqual t.ColumnCount 2
+                    $"Table {t.Name} contains less than 2 columns"
+                Expect.isGreaterThan t.RowCount 0
+                    $"Table {t.Name} contains no rows"
                     
     for r in arc.Runs do
         
         // TestCase Critical: Every run contains at least one annotation table
         testCase $"Run {r.Identifier} contains annotation table" <| fun _ ->
-            if r.TableCount = 0 then
-                failwith $"Run {r.Identifier} contains no annotation table"
+            Expect.isGreaterThan r.TableCount 0
+                $"Run {r.Identifier} contains no annotation table"
         
         // TestCase Critical: Every run annotation table contains basic information
         // (more than 2 columns and 0 rows)
@@ -185,11 +186,10 @@ let criticalCases =
         for t in r.Tables do
             testCase $"Table {t.Name} of run {r.Identifier} contains basic information" <| fun _ ->
                 
-                if t.ColumnCount < 2 then
-                    failwith $"Table {t.Name} contains less than 2 columns"
-                if t.RowCount = 0 then
-                    failwith $"Table {t.Name} contains no rows"
-
+                Expect.isGreaterThanOrEqual t.ColumnCount 2
+                    $"Table {t.Name} contains less than 2 columns"
+                Expect.isGreaterThan t.RowCount 0
+                    $"Table {t.Name} contains no rows"
 
     ]
     
