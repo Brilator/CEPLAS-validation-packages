@@ -188,12 +188,12 @@ let criticalCases =
         let fullName = $"{fname} {lname}"
 
         testCase $"Contact {fullName} contains first name" <| fun _ ->
-            if c.FirstName.IsNone then
-                failwith $"Contact {fullName} contains no first name"
+            Expect.isSome c.FirstName
+                $"Contact {fullName} contains no first name"
 
         testCase $"Contact {fullName} contains last name" <| fun _ ->
-            if c.LastName.IsNone then
-                failwith $"Contact {fullName} contains no last name"
+            Expect.isSome c.LastName
+                $"Contact {fullName} contains no last name"
 
     // TestCase Critical: At least two investigation contacts contain an affiliation and valid email
     
@@ -208,9 +208,8 @@ let criticalCases =
             )
             |> Seq.length
 
-        if validContacts < 2 then
-            failwith
-                $"Expected at least two contacts with a valid email and affiliation, but found {validContacts}."
+        Expect.isGreaterThanOrEqual validContacts 2
+            $"Expected at least two contacts with a valid email and affiliation, but found {validContacts}."
 
     ]
     
@@ -231,8 +230,10 @@ let nonCriticalCases =
             |> Seq.map Path.GetFileName
             |> Seq.contains "README.md"
 
-        if not containsReadmeMd then
-            failwithf $"ARC contains README file in recommended file format: README.md"
+        // TODO: this should only run if containsReadme isTrue
+        
+        Expect.isTrue containsReadmeMd
+            $"ARC contains README file in recommended file format: README.md"
 
     // TestCase Non-critical: ARC contains LICENSE file in recommended file format: LICENSE
 
@@ -242,8 +243,8 @@ let nonCriticalCases =
             |> Seq.map Path.GetFileName
             |> Seq.contains "LICENSE"
 
-        if not containsLICENSE then
-            failwithf $"ARC contains LICENSE file in recommended file format: LICENSE"
+        Expect.isTrue containsLICENSE
+            $"ARC contains LICENSE file in recommended file format: LICENSE"
 
     /////////////////////////////////////////////////////////////////
     ////// ARC Investigation metadata
@@ -266,40 +267,38 @@ let nonCriticalCases =
     // TestCase Non-critical: Every investigation contact should have an affiliation
         
         testCase $"Contact {fullName} contains affiliation" <| fun _ ->
-            if c.Affiliation.IsNone then
-                failwith $"Contact {fullName} contains no affiliation"
+            Expect.isSome c.Affiliation
+                $"Contact {fullName} contains no affiliation"
     
     // TestCase Non-critical: Every investigation contact should have an ORCID
     
         testCase $"Contact {fullName} contains ORCID" <| fun _ ->
-            if c.ORCID.IsNone then
-                failwith $"Contact {fullName} contains no ORCID"    
+            Expect.isSome c.ORCID
+                $"Contact {fullName} contains no ORCID"    
     
     // TestCase Non-critical: At least one investigation contact should have role 'researcher'
 
-    testCase $"At least one investigation contact should have role 'researcher'" <| fun _ ->
-        if arc.Contacts |> Seq.exists (fun c ->
-            c.Roles |> Seq.exists (fun oa -> 
-                oa.NameText = "researcher"    
-            )
-        )
-            |> not
-        then
-            failwith $"No investigation contact has role 'researcher'"
+    let containsResearcher = 
+        arc.Contacts
+        |> Seq.exists (fun c -> c.Roles |> Seq.exists (fun oa -> 
+                oa.NameText = "researcher")
+                )
+
+    Expect.isTrue containsResearcher
+        $"No investigation contact has role 'researcher'"
 
     // TestCase Non-critical: At least one investigation contact should have role 'principal investigator'
     
-    testCase $"At least one investigation contact should have role 'principal investigator'" <| fun _ ->
+    let containsPI = 
+        arc.Contacts
+        |> Seq.exists (fun c -> c.Roles |> Seq.exists (fun oa -> 
+                oa.NameText = "principal investigator")
+                )
     
-        if arc.Contacts |> Seq.exists (fun c ->
-            c.Roles |> Seq.exists (fun oa -> 
-                oa.NameText = "principal investigator"            
-            )
-        )
-            |> not
-        then
-            failwith $"No investigation contact has role 'principal investigator'"
-
+    testCase $"At least one investigation contact should have role 'principal investigator'" <| fun _ ->
+        Expect.isTrue containsPI
+            $"No investigation contact has role 'principal investigator'"
+    
     ]
 
 // Execution:
