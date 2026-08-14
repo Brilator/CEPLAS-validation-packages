@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="fsi">
+    <testcase name="[ Critical; criticalCases; Study TalinumGenomeDraft contains annotation table ]"
+      time="0.004">
+      <failure
+        message="Study TalinumGenomeDraft contains no annotation table. Expected a (0) to be greater than b (0)." />
+    </testcase>
+    <testcase name="[ NonCritical; nonCriticalCases; Study TalinumGenomeDraft contains title ]"
+      time="0.000">
+      <failure message="Study TalinumGenomeDraft contains no title. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Study TalinumGenomeDraft contains description ]"
+      time="0.000">
+      <failure
+        message="Study TalinumGenomeDraft contains no description. Expected Some _, was None." />
+    </testcase>
+    <testcase name="[ NonCritical; nonCriticalCases; Assay RNASeq contains title ]" time="0.000">
+      <failure message="Assay RNASeq contains no title. Expected Some _, was None." />
+    </testcase>
+    <testcase name="[ NonCritical; nonCriticalCases; Assay RNASeq contains description ]"
+      time="0.000">
+      <failure message="Assay RNASeq contains no description. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Assay RNASeq contains top-level metadata measurement type ]"
+      time="0.000">
+      <failure
+        message="Assay RNASeq contains no top-level metadata measurement type. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Assay RNASeq contains top-level metadata technology type ]"
+      time="0.000">
+      <failure
+        message="Assay RNASeq contains no top-level metadata technology type. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Assay RNASeq contains top-level metadata technology platform ]"
+      time="0.000">
+      <failure
+        message="Assay RNASeq contains no top-level metadata technology platform. Expected Some _, was None." />
+    </testcase>
+    <testcase name="[ NonCritical; nonCriticalCases; Run kallisto contains title ]" time="0.000">
+      <failure message="Run kallisto contains no title. Expected Some _, was None." />
+    </testcase>
+    <testcase name="[ NonCritical; nonCriticalCases; Run kallisto contains description ]"
+      time="0.000">
+      <failure message="Run kallisto contains no description. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Run kallisto contains top-level metadata measurement type ]"
+      time="0.000">
+      <failure
+        message="Run kallisto contains no top-level metadata measurement type. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Run kallisto contains top-level metadata technology type ]"
+      time="0.000">
+      <failure
+        message="Run kallisto contains no top-level metadata technology type. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Run kallisto contains top-level metadata technology platform ]"
+      time="0.000">
+      <failure
+        message="Run kallisto contains no top-level metadata technology platform. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ Critical; criticalCases; ARC contains at least one study or assay or workflow or run ]"
+      time="0.001" />
+    <testcase
+      name="[ Critical; criticalCases; ARC contains any annotation column (Characteristic, Parameter, Factor) ]"
+      time="0.001" />
+    <testcase
+      name="[ Critical; criticalCases; Study TalinumSamples-STRI contains annotation table ]"
+      time="0.001" />
+    <testcase
+      name="[ Critical; criticalCases; Table plant_material of study TalinumSamples-STRI contains basic information ]"
+      time="0.001" />
+    <testcase name="[ Critical; criticalCases; Assay RNASeq contains annotation table ]"
+      time="0.001" />
+    <testcase
+      name="[ Critical; criticalCases; Table rna_extraction of assay RNASeq contains basic information ]"
+      time="0.001" />
+    <testcase
+      name="[ Critical; criticalCases; Table illumina of assay RNASeq contains basic information ]"
+      time="0.001" />
+    <testcase name="[ Critical; criticalCases; Run kallisto contains annotation table ]"
+      time="0.001" />
+    <testcase
+      name="[ Critical; criticalCases; Table kallisto-index of run kallisto contains basic information ]"
+      time="0.001" />
+    <testcase
+      name="[ Critical; criticalCases; Table kallisto-quant of run kallisto contains basic information ]"
+      time="0.001" />
+    <testcase name="[ NonCritical; nonCriticalCases; Study TalinumGenomeDraft contains contacts ]"
+      time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Study TalinumSamples-STRI contains title ]"
+      time="0.000" />
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Study TalinumSamples-STRI contains description ]"
+      time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Study TalinumSamples-STRI contains contacts ]"
+      time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Study RNASeq contains contacts ]" time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Workflow kallisto contains title ]"
+      time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Workflow kallisto contains description ]"
+      time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Workflow kallisto contains contacts ]"
+      time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Study kallisto contains contacts ]"
+      time="0.000" />
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Table plant_material contains annotation column ]"
+      time="0.000" />
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Table rna_extraction contains annotation column ]"
+      time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Table illumina contains annotation column ]"
+      time="0.000" />
+  </testsuite>
+</testsuites>
