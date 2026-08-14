@@ -351,10 +351,10 @@ let nonCriticalCases =
             for t in arc.ArcTables do
                 testCase $"Table {t.Name} contains annotation column" <| fun _ ->
                 
-                let annoColCount = characteristicCount t + parameterCount t + factorCount t
+                    let annoColCount = characteristicCount t + parameterCount t + factorCount t
                 
-                Expect.isGreaterThan annoColCount 0
-                    $"Table {t.Name} contains no annotation column"  
+                    Expect.isGreaterThan annoColCount 0
+                        $"Table {t.Name} contains no annotation column"
 
     ]
 
