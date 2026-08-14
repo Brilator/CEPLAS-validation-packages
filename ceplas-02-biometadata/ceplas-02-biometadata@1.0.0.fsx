@@ -247,28 +247,28 @@ let nonCriticalCases =
             Expect.isSome a.Description
                 $"Assay {a.Identifier} contains no description"
             // Assay description is longer than 30 characters
-            if a.Description.Value.Length < 31 then
-                failwith $"Assay {a.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{a.Description.Value}\""
+            Expect.isGreaterThan a.Description.Value.Length  30
+                $"Assay {a.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{a.Description.Value}\""
 
         // TestCase Non-critical: Every assay contains performers
         testCase $"Study {a.Identifier} contains contacts" <| fun _ ->
-            if a.Performers.Count < 1 then
-                failwith $"Study {a.Identifier} contains no performers"
+            Expect.isGreaterThan a.Performers.Count 0
+                $"Study {a.Identifier} contains no performers"
 
         // TestCase Non-critical: Every assay contains a measurement type
         testCase $"Assay {a.Identifier} contains top-level metadata measurement type" <| fun _ ->
-            if a.MeasurementType.IsNone then
-                failwith $"Assay {a.Identifier} contains no top-level metadata measurement type"
+            Expect.isSome a.MeasurementType
+                $"Assay {a.Identifier} contains no top-level metadata measurement type"
         
         // TestCase Non-critical: Every assay contains a technology type
         testCase $"Assay {a.Identifier} contains top-level metadata technology type" <| fun _ ->
-            if a.TechnologyType.IsNone then
-                failwith $"Assay {a.Identifier} contains no top-level metadata technology type"
+            Expect.isSome a.TechnologyType
+                $"Assay {a.Identifier} contains no top-level metadata technology type"
         
         // TestCase Non-critical: Every assay contains a technology platform
         testCase $"Assay {a.Identifier} contains top-level metadata technology platform" <| fun _ ->
-            if a.TechnologyPlatform.IsNone then
-                failwith $"Assay {a.Identifier} contains no top-level metadata technology platform"
+            Expect.isSome a.TechnologyPlatform
+                $"Assay {a.Identifier} contains no top-level metadata technology platform"
 
     /////////////////////////////////////////////////////////////////
     ////// ARC Workflow top level metadata
@@ -279,25 +279,25 @@ let nonCriticalCases =
         // TestCase Non-critical: Every workflow contains a title
         testCase $"Workflow {w.Identifier} contains title" <| fun _ ->
             // Workflow title exists
-            if w.Title.IsNone then
-                failwith $"Workflow {w.Identifier} contains no title"
+            Expect.isSome w.Title
+                $"Workflow {w.Identifier} contains no title"
             // Workflow title is longer than 4 characters
-            if w.Title.Value.Length < 4 then
-                failwith $"Workflow {w.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{w.Title.Value}\""
+            Expect.isGreaterThan w.Title.Value.Length 3
+                $"Workflow {w.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{w.Title.Value}\""
         
         // TestCase Non-critical: Every workflow contains a description
         testCase $"Workflow {w.Identifier} contains description" <| fun _ ->
             // Workflow description exists
-            if w.Description.IsNone then
-                failwith $"Workflow {w.Identifier} contains no description"
+            Expect.isSome w.Description
+                $"Workflow {w.Identifier} contains no description"
             // Workflow description is longer than 30 characters
-            if w.Description.Value.Length < 31 then
-                failwith $"Workflow {w.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{w.Description.Value}\""
+            Expect.isGreaterThan w.Description.Value.Length 30
+                $"Workflow {w.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{w.Description.Value}\""
         
         // TestCase Non-critical: Every workflow contains contacts
         testCase $"Workflow {w.Identifier} contains contacts" <| fun _ ->
-            if w.Contacts.Count < 1 then
-                failwith $"Workflow {w.Identifier} contains no contacts"
+            Expect.isGreaterThan w.Contacts.Count 0
+                $"Workflow {w.Identifier} contains no contacts"
 
     /////////////////////////////////////////////////////////////////
     ////// ARC Run top level metadata
@@ -308,40 +308,40 @@ let nonCriticalCases =
         // TestCase Non-critical: Every run contains a title
         testCase $"Run {r.Identifier} contains title" <| fun _ ->
             // Run title exists
-            if r.Title.IsNone then
-                failwith $"Run {r.Identifier} contains no title"
+            Expect.isSome r.Title
+                $"Run {r.Identifier} contains no title"
             // Run title is longer than 4 characters
-            if r.Title.Value.Length < 4 then
-                failwith $"Run {r.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{r.Title.Value}\""
+            Expect.isGreaterThan r.Title.Value.Length 3
+                $"Run {r.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{r.Title.Value}\""
         
         // TestCase Non-critical: Every run contains a description
         testCase $"Run {r.Identifier} contains description" <| fun _ ->
             // Run description exists
-            if r.Description.IsNone then
-                failwith $"Run {r.Identifier} contains no description"
+            Expect.isSome r.Description
+                $"Run {r.Identifier} contains no description"
             // Run description is longer than 30 characters
-            if r.Description.Value.Length < 31 then
-                failwith $"Run {r.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{r.Description.Value}\""
+            Expect.isGreaterThan r.Description.Value.Length 30
+                $"Run {r.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{r.Description.Value}\""
 
         // TestCase Non-critical: Every run contains performers
         testCase $"Study {r.Identifier} contains contacts" <| fun _ ->
-            if r.Performers.Count < 1 then
-                failwith $"Study {r.Identifier} contains no performers"
+            Expect.isGreaterThan r.Performers.Count 0
+                $"Study {r.Identifier} contains no performers"
 
         // TestCase Non-critical: Every run contains a measurement type
         testCase $"Run {r.Identifier} contains top-level metadata measurement type" <| fun _ ->
-            if r.MeasurementType.IsNone then
-                failwith $"Run {r.Identifier} contains no top-level metadata measurement type"
+            Expect.isSome r.MeasurementType
+                $"Run {r.Identifier} contains no top-level metadata measurement type"
         
         // TestCase Non-critical: Every run contains a technology type
         testCase $"Run {r.Identifier} contains top-level metadata technology type" <| fun _ ->
-            if r.TechnologyType.IsNone then
-                failwith $"Run {r.Identifier} contains no top-level metadata technology type"
+            Expect.isSome r.TechnologyType
+                $"Run {r.Identifier} contains no top-level metadata technology type"
         
         // TestCase Non-critical: Every run contains a technology platform
         testCase $"Run {r.Identifier} contains top-level metadata technology platform" <| fun _ ->
-            if r.TechnologyPlatform.IsNone then
-                failwith $"Run {r.Identifier} contains no top-level metadata technology platform"
+            Expect.isSome r.TechnologyPlatform
+                $"Run {r.Identifier} contains no top-level metadata technology platform"
 
 
         // TestCase Non-critical: Every annotation table contains some annotation column
@@ -352,8 +352,9 @@ let nonCriticalCases =
                 testCase $"Table {t.Name} contains annotation column" <| fun _ ->
                 
                 let annoColCount = characteristicCount t + parameterCount t + factorCount t
-                if annoColCount = 0 then
-                    failwith $"Table {t.Name} contains no annotation column"  
+                
+                Expect.isGreaterThan annoColCount 0
+                    $"Table {t.Name} contains no annotation column"  
 
     ]
 
