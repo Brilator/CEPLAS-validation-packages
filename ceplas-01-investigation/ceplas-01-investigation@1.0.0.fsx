@@ -162,7 +162,7 @@ let criticalCases =
             $"Investigation {arc.Identifier} contains no title"
 
         // Investigation title is longer than 3 characters
-        Expect.isGreaterThan arc.Title.Value.Length 4 
+        Expect.isGreaterThan arc.Title.Value.Length 3 
             $"Investigation {arc.Identifier} contains no meaningful title (i.e. longer than 3 characters):\"{arc.Title.Value}\""       
 
     // TestCase Critical: Investigation contains description
@@ -172,7 +172,7 @@ let criticalCases =
         Expect.isSome arc.Description
             $"Investigation {arc.Identifier} contains no description"
         // Investigation description is longer than 30 characters
-        Expect.isGreaterThan arc.Description.Value.Length 31
+        Expect.isGreaterThan arc.Description.Value.Length 30
             $"Investigation {arc.Identifier} contains no meaningful description (i.e. longer than 30 characters):\"{arc.Description.Value}\""
 
     // TestCase Critical: Investigation contains contact
