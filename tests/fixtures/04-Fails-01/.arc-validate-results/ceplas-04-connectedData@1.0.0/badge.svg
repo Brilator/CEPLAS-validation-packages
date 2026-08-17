@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="246" height="20">
+<svg xmlns="http://www.w3.org/2000/svg" width="311" height="20">
     <linearGradient id="b" x2="0" y2="100%">
         <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
         <stop offset="1" stop-opacity=".1"/>
     </linearGradient>
     <mask id="1">
-        <rect width="246" height="20" rx="3" fill="#fff"/>
+        <rect width="311" height="20" rx="3" fill="#fff"/>
     </mask>
     <g mask="url(#1)">
         <path fill="#555" d="M0 0h203v20H0z"/>
-        <path fill="#4C1" d="M203 0h43v20H203z"/>
-        <path fill="url(#b)" d="M0 0h246v20H0z"/>
+        <path fill="#E05D44" d="M203 0h108v20H203z"/>
+        <path fill="url(#b)" d="M0 0h311v20H0z"/>
     </g>
     <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
         <text x="102.5" y="15" fill="#010101" fill-opacity=".3">ceplas-04-connectedData@1.0.0</text>
         <text x="101.5" y="14">ceplas-04-connectedData@1.0.0</text>
     </g>
     <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-        <text x="225.5" y="15" fill="#010101" fill-opacity=".3">18/18</text>
-        <text x="224.5" y="14">18/18</text>
+        <text x="258" y="15" fill="#010101" fill-opacity=".3">3 Critical Errors</text>
+        <text x="257" y="14">3 Critical Errors</text>
     </g>
 </svg>
