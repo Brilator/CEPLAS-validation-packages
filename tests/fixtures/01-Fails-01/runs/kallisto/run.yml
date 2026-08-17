@@ -1,0 +1,46 @@
+## Genome file to build kallisto Index
+IndexInput:
+  - class: File
+    path: ../../studies/TalinumGenomeDraft/resources/Talinum.gm.CDS.nt.fa
+
+## Fastq files to be mapped
+# The `readsOfOneSample` looks more complicated than needed
+# It's an array of records (each with one or mupltiple files and a sample name) to generically allow multiple fastq files per sample
+
+sampleRecordFiles:
+  - - class: File
+      path: ../../assays/RNASeq/dataset/DB_097_CAMMD_CAGATC_L001_R1_001.fastq.gz
+      format: edam:format_1930
+  - - class: File
+      path: ../../assays/RNASeq/dataset/DB_163_reC3MD_GTGAAA_L001_R1_001.fastq.gz
+      format: edam:format_1930
+  - - class: File
+      path: ../../assays/RNASeq/dataset/DB_099_CAMMD_CTTGTA_L001_R1_001.fastq.gz
+      format: edam:format_1930
+  - - class: File
+      path: ../../assays/RNASeq/dataset/DB_103_CAMMD_AGTCAA_L001_R1_001.fastq.gz
+      format: edam:format_1930
+  - - class: File
+      path: ../../assays/RNASeq/dataset/DB_161_reC3MD_GTCCGC_L001_R1_001.fastq.gz
+      format: edam:format_1930
+  - - class: File
+      path: ../../assays/RNASeq/dataset/DB_165_re-C3MD_GTGAAA_L002_R1_001.fastq.gz
+      format: edam:format_1930
+
+sampleRecordNames:
+  - 'DB_097'
+  - 'DB_163'
+  - 'DB_099'
+  - 'DB_103'
+  - 'DB_161'
+  - 'DB_165'
+
+### Kallisto quant Parameters
+isSingle: true
+FragmentLength: 200
+StandardDeviation: 20
+BootstrapSamples: 30
+resultsFolder: kallisto_results
+
+$namespaces:
+  edam: https://edamontology.org/

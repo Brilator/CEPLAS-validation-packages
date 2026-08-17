@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="fsi">
+    <testcase
+      name="[ Critical; criticalCases; At least two investigation contacts contain an affiliation and valid email ]"
+      time="0.003">
+      <failure
+        message="Expected at least two contacts with a valid email and affiliation, but found 0.. Expected a (0) to be greater than or equal to b (2)." />
+    </testcase>
+    <testcase name="[ Critical; criticalCases; ARC contains README ]" time="0.002">
+      <failure
+        message="ARC does not contain a README. README.md is recommended. Expected one of: README, README.adoc, README.asciidoc, README.markdown, README.md, README.mdown, README.mkd, README.org, README.rst, README.txt, readme, readme.adoc, readme.asciidoc, readme.markdown, readme.md, readme.mdown, readme.mkd, readme.org, readme.rst, readme.txt. Actual value was false but had expected it to be true." />
+    </testcase>
+    <testcase name="[ Critical; criticalCases; ARC contains LICENSE file ]" time="0.002">
+      <failure
+        message="ARC does not contain a LICENSE file. Expected one of: LICENCE, LICENCE.md, LICENCE.txt, LICENSE, LICENSE.md, LICENSE.txt, licence, licence.md, licence.txt, license, license.md, license.txt. Actual value was false but had expected it to be true." />
+    </testcase>
+    <testcase
+      name="[ Critical; criticalCases; Investigation Facultative-CAM-in-Talinum contains title ]"
+      time="0.002">
+      <failure
+        message="Investigation Facultative-CAM-in-Talinum contains no title. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ Critical; criticalCases; Investigation Facultative-CAM-in-Talinum contains description ]"
+      time="0.002">
+      <failure
+        message="Investigation Facultative-CAM-in-Talinum contains no description. Expected Some _, was None." />
+    </testcase>
+    <testcase name="[ Critical; criticalCases; Contact Someone  contains last name ]" time="0.002">
+      <failure message="Contact Someone  contains no last name. Expected Some _, was None." />
+    </testcase>
+    <testcase name="[ NonCritical; nonCriticalCases; Contact Dominik Brilhaus contains email ]"
+      time="0.000">
+      <failure
+        message="'invalidEmail@' is not a valid email. Actual value was false but had expected it to be true." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Contact Dominik Brilhaus contains affiliation ]"
+      time="0.000">
+      <failure
+        message="Contact Dominik Brilhaus contains no affiliation. Expected Some _, was None." />
+    </testcase>
+    <testcase name="[ NonCritical; nonCriticalCases; Contact Someone  contains email ]" time="0.000">
+      <failure message="Contact Someone  contains no email" />
+    </testcase>
+    <testcase name="[ NonCritical; nonCriticalCases; Contact Someone  contains ORCID ]" time="0.000">
+      <failure message="Contact Someone  contains no ORCID. Expected Some _, was None." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; At least one investigation contact should have role 'researcher' ]"
+      time="0.000">
+      <failure
+        message="No investigation contact has role 'researcher'. Actual value was false but had expected it to be true." />
+    </testcase>
+    <testcase
+      name="[ NonCritical; nonCriticalCases; At least one investigation contact should have role 'principal investigator' ]"
+      time="0.000">
+      <failure
+        message="No investigation contact has role 'principal investigator'. Actual value was false but had expected it to be true." />
+    </testcase>
+    <testcase
+      name="[ Critical; criticalCases; Investigation Facultative-CAM-in-Talinum contains contact ]"
+      time="0.001" />
+    <testcase name="[ Critical; criticalCases; Contact Dominik Brilhaus contains first name ]"
+      time="0.001" />
+    <testcase name="[ Critical; criticalCases; Contact Dominik Brilhaus contains last name ]"
+      time="0.001" />
+    <testcase name="[ Critical; criticalCases; Contact Someone  contains first name ]" time="0.001" />
+    <testcase name="[ NonCritical; nonCriticalCases; Contact Dominik Brilhaus contains ORCID ]"
+      time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Contact Someone  contains affiliation ]"
+      time="0.000" />
+  </testsuite>
+</testsuites>
