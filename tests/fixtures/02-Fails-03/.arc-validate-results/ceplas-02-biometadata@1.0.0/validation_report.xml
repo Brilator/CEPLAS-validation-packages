@@ -13,6 +13,18 @@
         message="Table emptyCols contains empty column(s): organism part, plant age. Actual value was false but had expected it to be true." />
     </testcase>
     <testcase
+      name="[ Critical; criticalCases; All table emptyCols rows of study TalinumSamples-STRI contain values ]"
+      time="0.003">
+      <failure
+        message="Table emptyCols contains empty row(s): 5. Actual value was false but had expected it to be true." />
+    </testcase>
+    <testcase
+      name="[ Critical; criticalCases; All table rna_extraction rows of assay RNASeq contain values ]"
+      time="0.003">
+      <failure
+        message="Table rna_extraction contains empty row(s): 6, 7. Actual value was false but had expected it to be true." />
+    </testcase>
+    <testcase
       name="[ Critical; criticalCases; Table kallisto-index of run kallisto contains basic information ]"
       time="0.003">
       <failure
@@ -20,7 +32,7 @@
     </testcase>
     <testcase
       name="[ Critical; criticalCases; Table emptyTable of run kallisto contains basic information ]"
-      time="0.003">
+      time="0.000">
       <failure
         message="Table emptyTable is empty. Actual value was true but had expected it to be false." />
     </testcase>
@@ -110,14 +122,10 @@
     <testcase
       name="[ Critical; criticalCases; All table illumina columns of assay RNASeq contain values ]"
       time="0.001" />
-    <testcase name="[ Critical; criticalCases; Run kallisto contains annotation table ]"
-      time="0.001" />
-    <testcase name="[ NonCritical; nonCriticalCases; Table emptyCols contains annotation column ]"
-      time="0.001" />
     <testcase
-      name="[ NonCritical; nonCriticalCases; Table rna_extraction contains annotation column ]"
+      name="[ Critical; criticalCases; All table illumina rows of assay RNASeq contain values ]"
       time="0.001" />
-    <testcase name="[ NonCritical; nonCriticalCases; Table illumina contains annotation column ]"
+    <testcase name="[ Critical; criticalCases; Run kallisto contains annotation table ]"
       time="0.001" />
     <testcase name="[ NonCritical; nonCriticalCases; Study TalinumGenomeDraft contains contacts ]"
       time="0.000" />
@@ -136,5 +144,12 @@
     <testcase name="[ NonCritical; nonCriticalCases; Workflow kallisto contains contacts ]"
       time="0.000" />
     <testcase name="[ NonCritical; nonCriticalCases; Run kallisto contains contacts ]" time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Table emptyCols contains annotation column ]"
+      time="0.000" />
+    <testcase
+      name="[ NonCritical; nonCriticalCases; Table rna_extraction contains annotation column ]"
+      time="0.000" />
+    <testcase name="[ NonCritical; nonCriticalCases; Table illumina contains annotation column ]"
+      time="0.000" />
   </testsuite>
 </testsuites>
