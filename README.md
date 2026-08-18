@@ -58,7 +58,7 @@ and run with
 
 ```bash
 dotnet fsi ceplas-01-investigation/ceplas-01-investigation@1.0.0.fsx tests/fixtures/100-PassAll
-dotnet fsi ceplas-01-investigation/ceplas-01-investigation@1.0.0.fsx tests/fixtures/01-Fails
+dotnet fsi ceplas-01-investigation/ceplas-01-investigation@1.0.0.fsx tests/fixtures/01-Fails-01
 
 dotnet fsi ceplas-02-biometadata/ceplas-02-biometadata@1.0.0.fsx tests/fixtures/100-PassAll
 dotnet fsi ceplas-02-biometadata/ceplas-02-biometadata@1.0.0.fsx tests/fixtures/02-Fails-01
