@@ -1,1 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="fsi"><testcase name="[ Critical; criticalCases; ARC contains at least one study or assay or workflow or run ]" time="0.003"><failure message="ARC does not contain any study or assay or workflow or run. Expected a (0) to be greater than b (0)." /></testcase><testcase name="[ Critical; criticalCases; ARC contains any annotation column (Characteristic, Parameter, Factor) ]" time="0.003"><failure message="ARC contains no annotation column (Characteristic, Parameter, Factor). Actual value was false but had expected it to be true." /></testcase></testsuite></testsuites>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="fsi">
+    <testcase
+      name="[ Critical; criticalCases; ARC contains at least one study or assay or workflow or run ]"
+      time="0.003">
+      <failure
+        message="ARC does not contain any study or assay or workflow or run. Expected a (0) to be greater than b (0)." />
+    </testcase>
+    <testcase
+      name="[ Critical; criticalCases; ARC contains any annotation column (Characteristic, Parameter, Factor) ]"
+      time="0.003">
+      <failure
+        message="ARC contains no annotation column (Characteristic, Parameter, Factor). Actual value was false but had expected it to be true." />
+    </testcase>
+  </testsuite>
+</testsuites>

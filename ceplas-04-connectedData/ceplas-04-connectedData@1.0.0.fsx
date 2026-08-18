@@ -75,7 +75,7 @@ let tableNodes =
     let tableNodeGetter (collectionID : string ) (tables : ArcTables) = 
         tables
         |> Seq.map (fun t ->
-            $"'{t.Name}' in '{collectionID}'", 
+            $"'{t.Name}' in {collectionID}", 
             set [
                 yield! t.InputNames |> List.map trimDataFileName
                 yield! t.OutputNames |> List.map trimDataFileName
