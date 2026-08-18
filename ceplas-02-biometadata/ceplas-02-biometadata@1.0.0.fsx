@@ -8,10 +8,13 @@ Description: |
         - ARC contains any annotation column (Characteristic, Parameter, Factor)
         - Every study contains at least one annotation table
         - Every study annotation table contains basic information
+        - Every study annotation table column contains values
         - Every assay contains at least one annotation table
         - Every assay annotation table contains basic information
+        - Every assay annotation table column contains values
         - Every run contains at least one annotation table
         - Every run annotation table contains basic information
+        - Every run annotation table column contains values
 
         ## Non-critical quality criteria
         - Every study contains a title
